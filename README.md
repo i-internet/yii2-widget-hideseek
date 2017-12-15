@@ -30,7 +30,6 @@ To include hideseek search in one of your pages, call the widget like this:
 ```php
 <?php
 /* @var $this yii\web\View */
-/* @var $model yii\base\Model */
 
 use simialbi\yii2\hideseek\HideSeek;
 
