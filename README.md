@@ -67,4 +67,4 @@ $this->params['breadcrumbs'][] = $this->title;
 
 ## License
 
-**yii2-widget-datetimepicker** is released under MIT license. See bundled [LICENSE](LICENSE) for details.
+**yii2-widget-hideseek** is released under MIT license. See bundled [LICENSE](LICENSE) for details.
