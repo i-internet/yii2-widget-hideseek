@@ -20,7 +20,7 @@ class HideSeek extends Widget {
 	/**
 	 * @var string the template used for composing the search field wrapper.
 	 */
-	public $template = '<div class="search-field">{input}</div>';
+	public $fieldTemplate = '<div class="search-field">{input}</div>';
 
 	/**
 	 * @var array the HTML attributes for the widget input tag.
@@ -55,7 +55,7 @@ class HideSeek extends Widget {
 
 		$this->registerPlugin();
 
-		return strtr($this->template, [
+		return strtr($this->fieldTemplate, [
 			'{input}' => $input
 		]);
 	}

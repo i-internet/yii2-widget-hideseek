@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <article>
 	<label for="search">Programming Language Popularity</label>
 	<?=HideSeek::widget([
+		'fieldTemplate' => '<div class="search-field">{input}</div>',
 		'options' => [
 			'placeholder' => 'Start typing here',
 			'autocomplete' => 'off'
