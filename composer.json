@@ -1,0 +1,33 @@
+{
+	"name": "simialbi/yii2-widget-hideseek",
+	"description": "yii2 widget of Dimitris Krestos' hideseek plugin",
+	"type": "yii2-extension",
+	"minimum-stability": "stable",
+	"license": "MIT",
+	"support": {
+		"issues": "https://github.com/simialbi/yii2-widget-hideseek/issues",
+		"source": "https://github.com/simialbi/yii2-widget-hideseek"
+	},
+	"authors": [
+		{
+			"name": "Simon Karlen",
+			"email": "simi.albi@gmail.com"
+		}
+	],
+	"repositories": [
+		{
+			"type": "composer",
+			"url": "https://asset-packagist.org"
+		}
+	],
+	"require": {
+		"yiisoft/yii2": "~2.0",
+		"yiisoft/yii2-bootstrap": "~2.0",
+		"simialbi/yii2-simialbi-base": "*"
+	},
+	"autoload": {
+		"psr-4": {
+			"simialbi\\yii2\\hideseek\\": ""
+		}
+	}
+}
