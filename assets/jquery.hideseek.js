@@ -62,7 +62,7 @@ or any similar structure...
 				$list.children().hide();
 			}
 			$this.keyup(function (e) {
-				if ([38, 40, 13].indexOf(e.keyCode) === -1 && (e.keyCode !== 8 ? $this.val().length >= $this.opts.min_chars : true)) {
+				if ([38, 40, 13].indexOf(e.keyCode) === -1 && ([8, 46].indexOf(e.keyCode) === -1 ? $this.val().length >= $this.opts.min_chars : true)) {
 					$this.trigger('_before');
 
 					var q = $this.val().toLowerCase();
@@ -112,6 +112,10 @@ or any similar structure...
 								$(this).show();
 							}
 						});
+					}
+
+					if ($this.val().length === 0) {
+						$this.trigger('_after_clear');
 					}
 
 					$this.trigger('_after');
