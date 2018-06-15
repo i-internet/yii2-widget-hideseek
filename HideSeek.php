@@ -7,56 +7,58 @@
 
 namespace simialbi\yii2\hideseek;
 
-
 use simialbi\yii2\widgets\Widget;
-use yii\bootstrap\Html;
+use yii\helpers\Html;
 
 /**
  * Class HideSeekWidget
  *
  * @author Simon Karlen <simi.albi@gmail.com>
  */
-class HideSeek extends Widget {
-	/**
-	 * @var string the template used for composing the search field wrapper.
-	 */
-	public $fieldTemplate = '<div class="search-field">{input}</div>';
+class HideSeek extends Widget
+{
+    /**
+     * @var string the template used for composing the search field wrapper.
+     */
+    public $fieldTemplate = '<div class="search-field">{input}</div>';
 
-	/**
-	 * @var array the HTML attributes for the widget input tag.
-	 * @see \yii\bootstrap\Html::renderTagAttributes() for details on how attributes are being rendered.
-	 */
-	public $options = [
-		'name'  => 'search',
-		'type'  => 'search'
-	];
+    /**
+     * @var array the HTML attributes for the widget input tag.
+     * @see \yii\helpers\Html::renderTagAttributes() for details on how attributes are being rendered.
+     */
+    public $options = [
+        'name' => 'search',
+        'type' => 'search'
+    ];
 
-	/**
-	 * @var array the options for the underlying JS plugin.
-	 */
-	public $clientOptions = [
-		'list' => '.list'
-	];
+    /**
+     * @var array the options for the underlying JS plugin.
+     */
+    public $clientOptions = [
+        'list' => '.list'
+    ];
 
-	/**
-	 * @inheritdoc
-	 */
-	public function init() {
-		parent::init();
-	}
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+    }
 
-	/**
-	 * @inheritdoc
-	 */
-	public function run() {
-		Html::addCssClass($this->options, 'form-control');
+    /**
+     * @inheritdoc
+     */
+    public function run()
+    {
+        Html::addCssClass($this->options, 'form-control');
 
-		$input = Html::tag('input', null, $this->options);
+        $input = Html::tag('input', null, $this->options);
 
-		$this->registerPlugin();
+        $this->registerPlugin();
 
-		return strtr($this->fieldTemplate, [
-			'{input}' => $input
-		]);
-	}
+        return strtr($this->fieldTemplate, [
+            '{input}' => $input
+        ]);
+    }
 }

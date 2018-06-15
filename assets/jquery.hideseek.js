@@ -29,160 +29,160 @@ or any similar structure...
 /* globals jQuery:false */
 
 ;(function ($) {
-	"use strict";
-	$.fn.hideseek = function (options) {
-		var defaults = {
-			list: '.hideseek-data',
-			nodata: '',
-			attribute: 'text',
-			matches: false,
-			highlight: false,
-			ignore: '',
-			headers: '',
-			navigation: false,
-			ignore_accents: false,
-			hidden_mode: false,
-			min_chars: 1
-		};
-		options = $.extend(defaults, options);
-		return this.each(function () {
-			var $this = $(this);
-			$this.opts = [];
-			$.map(['list', 'nodata', 'attribute', 'matches', 'highlight', 'ignore', 'headers', 'navigation', 'ignore_accents', 'hidden_mode', 'min_chars'], function (val) {
-				$this.opts[val] = $this.data(val) || options[val];
-			});
-			if ($this.opts.headers) {
-				$this.opts.ignore += $this.opts.ignore ? ', ' + $this.opts.headers : $this.opts.headers;
-			}
-			var $list = $($this.opts.list);
-			if ($this.opts.navigation) {
-				$this.attr('autocomplete', 'off');
-			}
-			if ($this.opts.hidden_mode) {
-				$list.children().hide();
-			}
-			$this.keyup(function (e) {
-				if ([38, 40, 13].indexOf(e.keyCode) === -1 && ([8, 46].indexOf(e.keyCode) === -1 ? $this.val().length >= $this.opts.min_chars : true)) {
-					$this.trigger('_before');
+    "use strict";
+    $.fn.hideseek = function (options) {
+        var defaults = {
+            list: '.hideseek-data',
+            nodata: '',
+            attribute: 'text',
+            matches: false,
+            highlight: false,
+            ignore: '',
+            headers: '',
+            navigation: false,
+            ignore_accents: false,
+            hidden_mode: false,
+            min_chars: 1
+        };
+        options = $.extend(defaults, options);
+        return this.each(function () {
+            var $this = $(this);
+            $this.opts = [];
+            $.map(['list', 'nodata', 'attribute', 'matches', 'highlight', 'ignore', 'headers', 'navigation', 'ignore_accents', 'hidden_mode', 'min_chars'], function (val) {
+                $this.opts[val] = $this.data(val) || options[val];
+            });
+            if ($this.opts.headers) {
+                $this.opts.ignore += $this.opts.ignore ? ', ' + $this.opts.headers : $this.opts.headers;
+            }
+            var $list = $($this.opts.list);
+            if ($this.opts.navigation) {
+                $this.attr('autocomplete', 'off');
+            }
+            if ($this.opts.hidden_mode) {
+                $list.children().hide();
+            }
+            $this.keyup(function (e) {
+                if ([38, 40, 13].indexOf(e.keyCode) === -1 && ([8, 46].indexOf(e.keyCode) === -1 ? $this.val().length >= $this.opts.min_chars : true)) {
+                    $this.trigger('_before');
 
-					var q = $this.val().toLowerCase();
-					$list.children($this.opts.ignore.trim() ? ":not(" + $this.opts.ignore + ")" : '').removeClass('selected').each(function () {
-						var data = (
-							$this.opts.attribute !== 'text'
-								? ($(this).attr($this.opts.attribute) || '')
-								: $(this).text()
-						).toLowerCase();
-						var treaty = data.removeAccents($this.opts.ignore_accents).indexOf(q) === -1 || q === ($this.opts.hidden_mode ? '' : false);
-						if (treaty) {
-							$(this).hide();
-						} else {
-							show_element($(this));
-							if ($this.opts.matches && q.match(new RegExp(Object.keys($this.opts.matches)[0])) !== null) {
-								if (data.match(new RegExp(Object.values($this.opts.matches)[0])) !== null) {
-									show_element($(this));
-								} else {
-									$(this).hide();
-								}
-							}
-						}
-						$this.trigger('_after_each');
-					});
-					// No results message
-					if ($this.opts.nodata) {
-						$list.find('.no-results').remove();
-						if (!$list.children(':not([style*="display: none"])').length) {
-							$list
-								.children()
-								.first()
-								.clone()
-								.removeHighlight()
-								.addClass('no-results')
-								.show()
-								.prependTo($this.opts.list)
-								.text($this.opts.nodata);
-							$this.trigger('_after_nodata');
-						}
-					}
-					// hide headers with no results
-					if ($this.opts.headers) {
-						$($this.opts.headers, $list).each(function () {
-							if (!$(this).nextUntil($this.opts.headers).not('[style*="display: none"],' + $this.opts.ignore).length) {
-								$(this).hide();
-							} else {
-								$(this).show();
-							}
-						});
-					}
+                    var q = $this.val().toLowerCase();
+                    $list.children($this.opts.ignore.trim() ? ":not(" + $this.opts.ignore + ")" : '').removeClass('selected').each(function () {
+                        var data = (
+                            $this.opts.attribute !== 'text'
+                                ? ($(this).attr($this.opts.attribute) || '')
+                                : $(this).text()
+                        ).toLowerCase();
+                        var treaty = data.removeAccents($this.opts.ignore_accents).indexOf(q) === -1 || q === ($this.opts.hidden_mode ? '' : false);
+                        if (treaty) {
+                            $(this).hide();
+                        } else {
+                            show_element($(this));
+                            if ($this.opts.matches && q.match(new RegExp(Object.keys($this.opts.matches)[0])) !== null) {
+                                if (data.match(new RegExp(Object.values($this.opts.matches)[0])) !== null) {
+                                    show_element($(this));
+                                } else {
+                                    $(this).hide();
+                                }
+                            }
+                        }
+                        $this.trigger('_after_each');
+                    });
+                    // No results message
+                    if ($this.opts.nodata) {
+                        $list.find('.no-results').remove();
+                        if (!$list.children(':not([style*="display: none"])').length) {
+                            $list
+                                .children()
+                                .first()
+                                .clone()
+                                .removeHighlight()
+                                .addClass('no-results')
+                                .show()
+                                .prependTo($this.opts.list)
+                                .text($this.opts.nodata);
+                            $this.trigger('_after_nodata');
+                        }
+                    }
+                    // hide headers with no results
+                    if ($this.opts.headers) {
+                        $($this.opts.headers, $list).each(function () {
+                            if (!$(this).nextUntil($this.opts.headers).not('[style*="display: none"],' + $this.opts.ignore).length) {
+                                $(this).hide();
+                            } else {
+                                $(this).show();
+                            }
+                        });
+                    }
 
-					if ($this.val().length === 0) {
-						$this.trigger('_after_clear');
-					}
+                    if ($this.val().length === 0) {
+                        $this.trigger('_after_clear');
+                    }
 
-					$this.trigger('_after');
-				}
+                    $this.trigger('_after');
+                }
 
-				function show_element(element) {
-					if ($this.opts.highlight) {
-						element.removeHighlight().highlight(q).show();
-					} else {
-						element.show();
-					}
-				}
+                function show_element(element) {
+                    if ($this.opts.highlight) {
+                        element.removeHighlight().highlight(q).show();
+                    } else {
+                        element.show();
+                    }
+                }
 
-				// Navigation
-				function current(element) {
-					return element.children('.selected:visible');
-				}
+                // Navigation
+                function current(element) {
+                    return element.children('.selected:visible');
+                }
 
-				function prev(element) {
-					return current(element).prevAll(":visible:first");
-				}
+                function prev(element) {
+                    return current(element).prevAll(":visible:first");
+                }
 
-				function next(element) {
-					return current(element).nextAll(":visible:first");
-				}
+                function next(element) {
+                    return current(element).nextAll(":visible:first");
+                }
 
-				if ($this.opts.navigation) {
-					if (e.keyCode === 38) {
-						if (current($list).length) {
-							prev($list).addClass('selected');
-							current($list).last().removeClass('selected');
-						} else {
-							$list.children(':visible').last().addClass('selected');
-						}
-					} else if (e.keyCode === 40) {
-						if (current($list).length) {
-							next($list).addClass('selected');
-							current($list).first().removeClass('selected');
-						} else {
-							$list.children(':visible').first().addClass('selected');
-						}
-					} else if (e.keyCode === 13) {
-						if (current($list).find('a').length) {
-							document.location = current($list).find('a').attr('href');
-						} else {
-							$this.val(current($list).text());
-						}
-					}
-				}
-			});
-		});
-	};
+                if ($this.opts.navigation) {
+                    if (e.keyCode === 38) {
+                        if (current($list).length) {
+                            prev($list).addClass('selected');
+                            current($list).last().removeClass('selected');
+                        } else {
+                            $list.children(':visible').last().addClass('selected');
+                        }
+                    } else if (e.keyCode === 40) {
+                        if (current($list).length) {
+                            next($list).addClass('selected');
+                            current($list).first().removeClass('selected');
+                        } else {
+                            $list.children(':visible').first().addClass('selected');
+                        }
+                    } else if (e.keyCode === 13) {
+                        if (current($list).find('a').length) {
+                            document.location = current($list).find('a').attr('href');
+                        } else {
+                            $this.val(current($list).text());
+                        }
+                    }
+                }
+            });
+        });
+    };
 })(jQuery);
 
 // Ignore accents
 String.prototype.removeAccents = function (enabled) {
-	"use strict";
+    "use strict";
 
-	if (enabled) {
-		return this
-			.replace(/[áàãâä]/gi, "a")
-			.replace(/[éè¨ê]/gi, "e")
-			.replace(/[íìïî]/gi, "i")
-			.replace(/[óòöôõ]/gi, "o")
-			.replace(/[úùüû]/gi, "u")
-			.replace(/[ç]/gi, "c")
-			.replace(/[ñ]/gi, "n");
-	}
-	return this;
+    if (enabled) {
+        return this
+            .replace(/[áàãâä]/gi, "a")
+            .replace(/[éè¨ê]/gi, "e")
+            .replace(/[íìïî]/gi, "i")
+            .replace(/[óòöôõ]/gi, "o")
+            .replace(/[úùüû]/gi, "u")
+            .replace(/[ç]/gi, "c")
+            .replace(/[ñ]/gi, "n");
+    }
+    return this;
 };
