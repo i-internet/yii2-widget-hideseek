@@ -12,13 +12,13 @@ The preferred way to install this extension is through [composer](http://getcomp
 
 Either run
 
-```
+```shell
 $ php composer.phar require --prefer-dist simialbi/yii2-widget-hideseek
 ```
 
 or add 
 
-```
+```json
 "simialbi/yii2-widget-hideseek": "*"
 ```
 

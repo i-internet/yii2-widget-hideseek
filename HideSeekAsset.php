@@ -7,7 +7,6 @@
 
 namespace simialbi\yii2\hideseek;
 
-
 use simialbi\yii2\web\AssetBundle;
 
 /**
@@ -21,8 +20,8 @@ class HideSeekAsset extends AssetBundle
      * @var array list of JavaScript files that this bundle contains.
      */
     public $js = [
-        'jquery.highlight.min.js',
-        'jquery.hideseek.min.js'
+        'jquery.highlight.js',
+        'jquery.hideseek.js'
     ];
 
     /**
