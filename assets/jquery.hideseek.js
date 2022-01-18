@@ -29,7 +29,7 @@ or any similar structure...
 */
 
 /* global jQuery: false */
-;(function ($, window, undefined) {
+;(function ($) {
     'use strict';
 
     $.fn.hideseek = function (options) {
@@ -69,7 +69,12 @@ or any similar structure...
                 if ($this.opts.hidden_mode) {
                     $list.children().hide();
                 }
+                if ($this.val().length === 0) {
+                    $this.trigger('_after_clear');
+                    return;
+                }
                 if ([38, 40, 13].indexOf(e.keyCode) === -1 && (e.keyCode !== 8 ? $this.val().length >= $this.opts.min_chars : true)) {
+                    $this.trigger('_before');
                     var q = $this.val().toLowerCase();
 
                     $list.children($this.opts.ignore.trim() ? ':not(' + $this.opts.ignore + ')' : '').removeClass('selected').each(function () {
@@ -177,7 +182,7 @@ or any similar structure...
     $(document).ready(function () {
         $('[data-toggle="hideseek"]').hideseek();
     });
-})(jQuery, window);
+})(jQuery);
 
 // Ignore accents
 String.prototype.removeAccents = function (enabled) {
