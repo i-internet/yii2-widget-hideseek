@@ -41,15 +41,7 @@ class HideSeek extends Widget
     /**
      * @inheritdoc
      */
-    public function init()
-    {
-        parent::init();
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function run()
+    public function run(): string
     {
         Html::addCssClass($this->options, 'form-control');
 
