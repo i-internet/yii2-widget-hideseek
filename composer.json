@@ -21,9 +21,7 @@
     }
   ],
   "require": {
-    "php": ">=7.1",
-    "yiisoft/yii2": "~2.0",
-    "simialbi/yii2-simialbi-base": ">=0.13.0 | ^1.0.0"
+    "php": ">=7.1"
   },
   "require-dev": {
     "yiisoft/yii2-coding-standards": "~2.0"
